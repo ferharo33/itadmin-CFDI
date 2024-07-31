@@ -1,3 +1,6 @@
+v14.33
+-Multiples predial, validar linea de factura sin producto.
+
 v14.32
 -Error cuando un producto tiene 100% de descuento
 
