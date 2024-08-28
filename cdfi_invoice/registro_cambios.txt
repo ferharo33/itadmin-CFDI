@@ -1,3 +1,6 @@
+v14.34
+Redondeos en impuestos locales
+
 v14.33
 -Multiples predial, validar linea de factura sin producto.
 
