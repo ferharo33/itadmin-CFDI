@@ -1,0 +1,49 @@
+v17.16
+-Agregar información de factura glboal en formato de factura
+
+v17.15
+-Solo mostrar boton "Validar y Generar REP" en pagos de clientes
+
+v17.14
+-Cambios en Serie y Folio de facturas y pagos.
+
+v17.13
+-Calculo de EquivalenciaDR en facturas y pagos multimoneda.
+
+v17.12
+-Timbrado de promociones y descuentos.
+
+v17.11
+-Valida producto en línea de factura.
+
+v17.10
+-Cambios en predial y redondeos en precio unitario y subtotal.
+-Valida producto en línea de factura.
+
+v17.09
+-Agrega descripción en forma y método de pago, régimen fiscal.
+
+v17.08
+-Leyenda cancelado en factura
+
+v17.07
+-Cambios en el PDF, corregir impuestos con producto final con 100% de descuento
+
+v17.06
+-Corregir error en QR de pagos
+
+v17.05
+-Cancelación rechazada si está vacío el estado de cancelación.
+
+v17.04
+-Corrección en PDF de factura para agregar importe
+
+v17.03
+-Corrección para adjuntar el XML en correo de pago
+
+v17.02
+-Se hicieron ajustes para el timbrado de pagos 2.0B
+
+v17.01
+-Version no para producción.
+-No adjunta XML en correo de pagos.
