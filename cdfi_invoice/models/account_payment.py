@@ -778,18 +778,19 @@ class AccountPayment(models.Model):
                 p._set_data_from_xml(base64.b64decode(json_response['pago_xml']))
 
                 xml_file_name = p.name.replace('.', '').replace('/', '_') + '.xml'
+
+                attach = p.env['ir.attachment'].sudo().create(
+                    {
+                        'name': xml_file_name,
+                        'datas': json_response['pago_xml'],
+                     # 'datas_fname': xml_file_name,
+                        'res_model': p._name,
+                        'res_id': p.id,
+                        'type': 'binary',
+                        'mimetype': 'application/xml',
+                        'description': _('Factura CFDI del documento %s.') % p.name,
+                    })
                 if p.move_id:
-                   attach = p.env['ir.attachment'].sudo().create(
-                       {
-                           'name': xml_file_name,
-                           'datas': json_response['pago_xml'],
-                        # 'datas_fname': xml_file_name,
-                           'res_model': p._name,
-                           'res_id': p.id,
-                           'type': 'binary',
-                           'mimetype': 'application/xml',
-                           'description': _('Factura CFDI del documento %s.') % p.name,
-                       })
                    cfdi_format = p.env.ref('cdfi_invoice.edi_cfdi_4_0')
                    edi_doc = p.env['account.edi.document'].sudo().create({
                        'edi_format_id': cfdi_format.id,
