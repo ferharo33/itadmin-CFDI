@@ -744,11 +744,11 @@ class AccountPayment(models.Model):
                 return True
 
             values = p.to_json()
-            if p.company_id.proveedor_timbrado == 'multifactura':
+            if p.company_id.proveedor_timbrado == 'servidor':
                 url = '%s' % ('http://facturacion.itadmin.com.mx/api/payment')
-            elif p.company_id.proveedor_timbrado == 'multifactura2':
+            elif p.company_id.proveedor_timbrado == 'servidor2':
                 url = '%s' % ('http://facturacion2.itadmin.com.mx/api/payment')
-            elif p.company_id.proveedor_timbrado == 'multifactura3':
+            elif p.company_id.proveedor_timbrado == 'servidor3':
                 url = '%s' % ('http://facturacion3.itadmin.com.mx/api/payment')
             else:
                 raise UserError(_('Error, falta seleccionar el servidor de timbrado en la configuración de la compañía.'))
@@ -919,11 +919,11 @@ class AccountPayment(models.Model):
                 'motivo': p.env.context.get('motivo_cancelacion', '02'),
                 'foliosustitucion': p.env.context.get('foliosustitucion', ''),
             }
-            if p.company_id.proveedor_timbrado == 'multifactura':
+            if p.company_id.proveedor_timbrado == 'servidor':
                 url = '%s' % ('http://facturacion.itadmin.com.mx/api/refund')
-            elif p.company_id.proveedor_timbrado == 'multifactura2':
+            elif p.company_id.proveedor_timbrado == 'servidor2':
                 url = '%s' % ('http://facturacion2.itadmin.com.mx/api/refund')
-            elif p.company_id.proveedor_timbrado == 'multifactura3':
+            elif p.company_id.proveedor_timbrado == 'servidor3':
                 url = '%s' % ('http://facturacion3.itadmin.com.mx/api/refund')
             else:
                 raise UserError(_('Error, falta seleccionar el servidor de timbrado en la configuración de la compañía.'))

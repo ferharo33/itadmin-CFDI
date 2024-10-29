@@ -12,9 +12,9 @@ class ResCompany(models.Model):
     _inherit = 'res.company'
 
     proveedor_timbrado= fields.Selection(
-        selection=[('multifactura', _('Servidor 1')),
-                   ('multifactura2', _('Servidor 2')),
-                   ('multifactura3', _('Servidor 3')),],
+        selection=[('servidor', _('Servidor 1')),
+                   ('servidor2', _('Servidor 2')),
+                   ('servidor3', _('Servidor 3')),],
         string=_('Proveedor de timbrado'), 
     )
     api_key = fields.Char(string=_('API Key'))
@@ -87,7 +87,7 @@ class ResCompany(models.Model):
                  'modo_prueba': self.modo_prueba,
                  }
         url=''
-        if self.proveedor_timbrado == 'multifactura':
+        if self.proveedor_timbrado == 'servidor':
             url = '%s' % ('http://facturacion.itadmin.com.mx/api/saldo')
 
         if not url:
@@ -121,11 +121,11 @@ class ResCompany(models.Model):
                  'contrasena': self.contrasena,
                  }
         url=''
-        if self.proveedor_timbrado == 'multifactura':
+        if self.proveedor_timbrado == 'servidor':
             url = '%s' % ('http://facturacion.itadmin.com.mx/api/validarcsd')
-        elif self.proveedor_timbrado == 'multifactura2':
+        elif self.proveedor_timbrado == 'servidor2':
             url = '%s' % ('http://facturacion2.itadmin.com.mx/api/validarcsd')
-        elif self.proveedor_timbrado == 'multifactura3':
+        elif self.proveedor_timbrado == 'servidor3':
             url = '%s' % ('http://facturacion3.itadmin.com.mx/api/validarcsd')
         if not url:
             return
@@ -156,11 +156,11 @@ class ResCompany(models.Model):
                  'rfc': self.vat,
                  }
         url=''
-        if self.proveedor_timbrado == 'multifactura':
+        if self.proveedor_timbrado == 'servidor':
             url = '%s' % ('http://facturacion.itadmin.com.mx/api/borrarcsd')
-        elif self.proveedor_timbrado == 'multifactura2':
+        elif self.proveedor_timbrado == 'servidor2':
             url = '%s' % ('http://facturacion2.itadmin.com.mx/api/borrarcsd')
-        elif self.proveedor_timbrado == 'multifactura3':
+        elif self.proveedor_timbrado == 'servidor3':
             url = '%s' % ('http://facturacion3.itadmin.com.mx/api/borrarcsd')
         if not url:
             return
