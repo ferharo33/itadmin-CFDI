@@ -273,15 +273,15 @@ class AccountMove(models.Model):
             'receptor': {
                 'nombre': nombre,
                 'rfc': self.partner_id.vat.upper() if self.partner_id.country_id.code == 'MX' else 'XEXX010101000',
-                'ResidenciaFiscal': self.partner_id.residencia_fiscal,
-                'NumRegIdTrib': self.partner_id.registro_tributario,
+                'ResidenciaFiscal': self.partner_id.country_id.codigo_mx if self.partner_id.country_id.code != 'MX' else '',
+                'NumRegIdTrib': self.partner_id.vat.upper() if self.partner_id.country_id.code != 'MX' else '',
                 'UsoCFDI': self.uso_cfdi_id.code,
                 'RegimenFiscalReceptor': self.partner_id.regimen_fiscal_id.code,
                 'DomicilioFiscalReceptor': zipreceptor,
             },
             'informacion': {
                 'cfdi': '4.0',
-                'sistema': 'odoo17',
+                'sistema': 'odoo18',
                 'version': '1',
                 'api_key': self.company_id.proveedor_timbrado,
                 'modo_prueba': self.company_id.modo_prueba,
@@ -645,6 +645,10 @@ class AccountMove(models.Model):
             self.write({'proceso_timbrado': False})
             self.env.cr.commit()
             raise UserError(_('El receptor no tiene nombre configurado.'))
+        if not self.partner_id.country_id:
+            self.write({'proceso_timbrado': False})
+            self.env.cr.commit()
+            raise UserError(_('El receptor no tiene un país configurado.'))
         if not self.uso_cfdi_id:
             self.write({'proceso_timbrado': False})
             self.env.cr.commit()

@@ -1,2 +1,5 @@
+v18.02
+-Agregar catálogo de países SAT.
+
 v18.01
 -Versión de producción

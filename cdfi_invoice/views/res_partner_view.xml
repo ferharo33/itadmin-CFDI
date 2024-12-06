@@ -15,10 +15,6 @@
                                     <field name="uso_cfdi_id"/>
                                     <field name="regimen_fiscal_id"/>
                                 </group>
-                                <group string="Detalles extranjero">
-                                    <field name="residencia_fiscal"/>
-                                    <field name="registro_tributario"/>
-                                </group>
                             </group>
                     </page>
                 </xpath>
