@@ -1,3 +1,9 @@
+v16.35
+-Agregar mensaje de error al revisar saldo.
+
+v16.34
+-Agregar mensaje de error con conceptos sin información.
+
 v16.33
 -Agregar tipos de redondeos en pagos
 
