@@ -94,6 +94,10 @@ class ResCompany(models.Model):
         return True
 
     def get_saldo(self):
+        if not self.vat:
+           raise UserError(_('Falta colocar el RFC'))
+        if not self.proveedor_timbrado:
+           raise UserError(_('Falta seleccionar el proveedor de timbrado'))
         values = {
                  'rfc': self.vat,
                  'api_key': self.proveedor_timbrado,
