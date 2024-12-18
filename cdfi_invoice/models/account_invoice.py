@@ -126,7 +126,7 @@ class AccountMove(models.Model):
 
     @api.model
     def _reverse_moves(self, default_values_list=None, cancel=True):
-        values = super(AccountMove, self)._reverse_moves(default_values, cancel)
+        values = super(AccountMove, self)._reverse_moves(default_values_list, cancel)
         for inv in self:
            if inv.estado_factura == 'factura_correcta':
                values['uuid_relacionado'] = inv.folio_fiscal
