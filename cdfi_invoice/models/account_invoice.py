@@ -125,7 +125,7 @@ class AccountMove(models.Model):
     company_cfdi = fields.Boolean(related="company_id.company_cfdi",store=True)
 
     @api.model
-    def _reverse_moves(self, default_values, cancel=True):
+    def _reverse_moves(self, default_values_list=None, cancel=True):
         values = super(AccountMove, self)._reverse_moves(default_values, cancel)
         for inv in self:
            if inv.estado_factura == 'factura_correcta':

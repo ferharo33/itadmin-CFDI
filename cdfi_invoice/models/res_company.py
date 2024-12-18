@@ -26,7 +26,7 @@ class ResCompany(models.Model):
     contrasena = fields.Char(string=_('Contraseña'))
     nombre_fiscal = fields.Char(string=_('Razón social'))
     serie_complemento = fields.Char(string=_('Serie complemento de pago'))
-    telefono_sms = fields.Char(string=_('Teléfono celular'))  
+    telefono_sms = fields.Char(string=_('Teléfono celular'))
     saldo_timbres =  fields.Float(string=_('Saldo de timbres'), readonly=True)
     saldo_alarma =  fields.Float(string=_('Alarma timbres'), default=10)
     correo_alarma =  fields.Char(string=_('Correo de alarma'))
