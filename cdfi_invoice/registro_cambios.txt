@@ -1,3 +1,6 @@
+v17.21
+-Cambiar timbrado por por SSL
+
 v17.20
 -Valores por defecto en reversión de movimientos.
 
