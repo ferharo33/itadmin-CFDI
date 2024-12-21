@@ -1,4 +1,7 @@
 v16.35
+-Cambiar timbrados a SSL.
+
+v16.35
 -Agregar mensaje de error al revisar saldo.
 
 v16.34
