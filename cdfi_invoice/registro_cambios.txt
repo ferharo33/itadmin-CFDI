@@ -1,3 +1,6 @@
+v14.38
+-Cambiar a SSL.
+
 v14.37
 -Agregar mensaje de error al revisar saldo.
 
