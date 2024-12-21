@@ -488,6 +488,10 @@ class AccountMove(models.Model):
             components = []
             if line.product_id.product_parts_ids:
                 for component in line.product_id.product_parts_ids:
+                    if not component.product_id.clave_producto:
+                        raise UserError(_('El producto %s tiene un componente sin clave de producto.') % (line.product_id.name))
+                    if not component.product_id.name:
+                        raise UserError(_('El producto %s tiene un componente sin nombre.') % (line.product_id.name))
                     components.append({'ClaveProdServ': component.product_id.clave_producto,
                                       'Cantidad': component.cantidad,
                                       'Descripcion': self.clean_text(component.product_id.name),
@@ -738,11 +742,9 @@ Si requiere timbrar la factura nuevamente deshabilite el checkbox de "Proceso de
 
             values = invoice.to_json()
             if invoice.company_id.proveedor_timbrado == 'servidor':
-                url = '%s' % ('http://facturacion.itadmin.com.mx/api/invoice')
+                url = '%s' % ('https://facturacion.itadmin.com.mx/api/invoice')
             elif invoice.company_id.proveedor_timbrado == 'servidor2':
-                url = '%s' % ('http://facturacion2.itadmin.com.mx/api/invoice')
-            elif invoice.company_id.proveedor_timbrado == 'servidor3':
-                url = '%s' % ('http://facturacion3.itadmin.com.mx/api/invoice')
+                url = '%s' % ('https://facturacion2.itadmin.com.mx/api/invoice')
             else:
                 invoice.write({'proceso_timbrado': False})
                 self.env.cr.commit()
@@ -751,7 +753,7 @@ Si requiere timbrar la factura nuevamente deshabilite el checkbox de "Proceso de
 
             try:
                 response = requests.post(url,
-                                         auth=None, verify=False, data=json.dumps(values),
+                                         auth=None, data=json.dumps(values),
                                          headers={"Content-type": "application/json"})
             except Exception as e:
                 error = str(e)
@@ -834,19 +836,17 @@ Si requiere timbrar la factura nuevamente deshabilite el checkbox de "Proceso de
                     'motivo': self.env.context.get('motivo_cancelacion', '02'),
                     'foliosustitucion': self.env.context.get('foliosustitucion', ''),
                 }
-                if self.company_id.proveedor_timbrado == 'servidor':
-                    url = '%s' % ('http://facturacion.itadmin.com.mx/api/refund')
+                if invoice.company_id.proveedor_timbrado == 'servidor':
+                    url = '%s' % ('https://facturacion.itadmin.com.mx/api/refund')
                 elif invoice.company_id.proveedor_timbrado == 'servidor2':
-                    url = '%s' % ('http://facturacion2.itadmin.com.mx/api/refund')
-                elif invoice.company_id.proveedor_timbrado == 'servidor3':
-                    url = '%s' % ('http://facturacion3.itadmin.com.mx/api/refund')
+                    url = '%s' % ('https://facturacion2.itadmin.com.mx/api/refund')
                 else:
                     raise UserError(
                         _('Error, falta seleccionar el servidor de timbrado en la configuración de la compañía.'))
 
                 try:
                     response = requests.post(url,
-                                             auth=None, verify=False, data=json.dumps(values),
+                                             auth=None, data=json.dumps(values),
                                              headers={"Content-type": "application/json"})
                 except Exception as e:
                     error = str(e)
@@ -913,18 +913,16 @@ Si requiere timbrar la factura nuevamente deshabilite el checkbox de "Proceso de
             }
 
             if invoice.company_id.proveedor_timbrado == 'servidor':
-                url = '%s' % ('http://facturacion.itadmin.com.mx/api/consulta-cacelar')
+                url = '%s' % ('https://facturacion.itadmin.com.mx/api/consulta-cacelar')
             elif invoice.company_id.proveedor_timbrado == 'servidor2':
-                url = '%s' % ('http://facturacion2.itadmin.com.mx/api/consulta-cacelar')
-            elif invoice.company_id.proveedor_timbrado == 'servidor3':
-                url = '%s' % ('http://facturacion3.itadmin.com.mx/api/consulta-cacelar')
+                url = '%s' % ('https://facturacion2.itadmin.com.mx/api/consulta-cacelar')
             else:
                 raise UserError(
                     _('Error, falta seleccionar el servidor de timbrado en la configuración de la compañía.'))
 
             try:
                 response = requests.post(url,
-                                         auth=None, verify=False, data=json.dumps(values),
+                                         auth=None, data=json.dumps(values),
                                          headers={"Content-type": "application/json"})
 
                 if "Whoops, looks like something went wrong." in response.text:
@@ -981,15 +979,13 @@ Si requiere timbrar la factura nuevamente deshabilite el checkbox de "Proceso de
             }
             url = ''
             if invoice.company_id.proveedor_timbrado == 'servidor':
-                url = '%s' % ('http://facturacion.itadmin.com.mx/api/command')
+                url = '%s' % ('https://facturacion.itadmin.com.mx/api/command')
             elif invoice.company_id.proveedor_timbrado == 'servidor2':
-                url = '%s' % ('http://facturacion2.itadmin.com.mx/api/command')
-            elif invoice.company_id.proveedor_timbrado == 'servidor3':
-                url = '%s' % ('http://facturacion3.itadmin.com.mx/api/command')
+                url = '%s' % ('https://facturacion2.itadmin.com.mx/api/command')
             if not url:
                 return
             try:
-                response = requests.post(url, auth=None, verify=False, data=json.dumps(values),
+                response = requests.post(url, auth=None, data=json.dumps(values),
                                          headers={"Content-type": "application/json"})
 
                 if "Whoops, looks like something went wrong." in response.text:
