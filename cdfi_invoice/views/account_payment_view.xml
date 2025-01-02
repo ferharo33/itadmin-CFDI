@@ -11,7 +11,7 @@
                         <field name="company_cfdi" invisible="1"/>
                     </field>
                     <button name="action_post" position="after">
-                        <button name="complete_payment" class="oe_highlight" invisible="state != 'paid' or estado_pago in ['pago_correcto', 'factura_cancelada'] 
+                        <button name="complete_payment" class="oe_highlight" invisible="state not in ['paid', 'in_process'] or estado_pago in ['pago_correcto', 'factura_cancelada'] 
                                 or company_cfdi == False or payment_type == 'outbound'" string="Genera REP" type="object"/>
                         <button name="send_payment" class="oe_highlight" invisible="estado_pago != 'pago_correcto' or company_cfdi == False" 
                                 string="Enviar por correo-e" type="object"/>
@@ -22,7 +22,7 @@
                     </button>
                     <xpath expr="//sheet" position="inside">
                         <notebook>
-                            <page name="info_cdfi" string="CFDI" invisible="state != 'paid' or company_cfdi == False">
+                            <page name="info_cdfi" string="CFDI" invisible="state not in ['paid', 'in_process'] or company_cfdi == False">
                                     <group cols="4">
                                         <group string="Datos del comprobante">
                                             <field name="forma_pago_id" readonly="estado_pago != 'pago_no_enviado'"/>

@@ -693,8 +693,8 @@ class AccountPayment(models.Model):
                 'receptor': {
                     'nombre': self.partner_id.name.upper(),
                     'rfc': self.partner_id.vat.upper(),
-                    'ResidenciaFiscal': self.partner_id.residencia_fiscal,
-                    'NumRegIdTrib': self.partner_id.registro_tributario,
+                    'ResidenciaFiscal': self.partner_id.country_id.codigo_mx if self.partner_id.country_id.code != 'MX' else '',
+                    'NumRegIdTrib': self.partner_id.vat.upper() if self.partner_id.country_id.code != 'MX' else '',
                     'UsoCFDI': 'CP01',
                     'RegimenFiscalReceptor': self.partner_id.regimen_fiscal_id.code,
                     'DomicilioFiscalReceptor': zipreceptor,
@@ -817,7 +817,6 @@ class AccountPayment(models.Model):
                 p._set_data_from_xml(base64.b64decode(json_response['pago_xml']))
 
                 xml_file_name = p.name.replace('.', '').replace('/', '_') + '.xml'
-
                 attach = p.env['ir.attachment'].sudo().create(
                     {
                         'name': xml_file_name,

@@ -1,3 +1,6 @@
+v18.06
+-Correccion campos en timbrado pagos
+
 v18.05
 -Cambiar timbrado por por SSL
 
