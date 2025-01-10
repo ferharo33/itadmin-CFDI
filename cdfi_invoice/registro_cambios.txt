@@ -1,3 +1,6 @@
+v17.22
+-Corrección el número de parcialidad
+
 v17.21
 -Cambiar timbrado por por SSL
 

@@ -348,9 +348,11 @@ class AccountPayment(models.Model):
                             invoice = invoice_line.move_id
                             decimal_p = 2
 
+                            exchange_number = 0
                             exchange_amount = 0
                             for exchange in partial.exchange_move_id:
                                  exchange_amount += exchange.amount_total
+                                 exchange_number += 1 
 
                             if partial.amount == 0:
                                 raise UserError(
@@ -359,7 +361,7 @@ class AccountPayment(models.Model):
                             if not invoice.factura_cfdi:
                                 continue
 
-                            payment_content = invoice.invoice_payments_widget['content']
+                            payment_content = len(invoice.invoice_payments_widget['content']) - exchange_number
 
                             if invoice.total_factura <= 0:
                                 raise UserError(
@@ -465,7 +467,7 @@ class AccountPayment(models.Model):
                                 'EquivalenciaDR': equivalenciadr,
                                 'IdDocumento': invoice.folio_fiscal,
                                 'folio_facura': invoice.number_folio,
-                                'NumParcialidad': len(payment_content),
+                                'NumParcialidad': payment_content,
                                 'ImpSaldoAnt': float_round(
                                     min(invoice.amount_residual + amount_paid_invoice_curr, invoice.amount_total),
                                     precision_digits=decimal_p, rounding_method='UP'),
@@ -642,7 +644,7 @@ class AccountPayment(models.Model):
                 impuestosp.update({'RetencionesP': retencionp})
         totales.update({'MontoTotalPagos': self.set_decimals(self.amount,2) 
                                            if self.monedap == 'MXN' 
-                                           else self.selectRoundseparate(self.amount * float(self.tipocambiop), 2,  self.redondeo_t_total), })
+                                           else self.selectRoundseparate(self.amount * float(self.tipocambiop), 2, self.redondeo_t_total), })
         # totales.update({'MontoTotalPagos': self.set_decimals(self.total_pago, 2),})
 
         pagos = []
