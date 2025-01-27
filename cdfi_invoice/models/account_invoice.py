@@ -483,6 +483,10 @@ class AccountMove(models.Model):
             components = []
             if line.product_id.product_parts_ids:
                 for component in line.product_id.product_parts_ids:
+                    if not component.product_id.clave_producto:
+                        raise UserError(_('El producto %s tiene un componente sin clave de producto.') % (line.product_id.name))
+                    if not component.product_id.name:
+                        raise UserError(_('El producto %s tiene un componente sin nombre.') % (line.product_id.name))
                     components.append({'ClaveProdServ': component.product_id.clave_producto,
                                       'Cantidad': component.cantidad,
                                       'Descripcion': self.clean_text(component.product_id.name),
@@ -772,7 +776,7 @@ Si requiere timbrar la factura nuevamente deshabilite el checkbox de "Proceso de
                         'name': file_name,
                         'datas': json_response['factura_xml'],
                         # 'datas_fname': file_name,
-                        'res_model': self._name,
+                        'res_model': invoice._name,
                         'res_id': invoice.id,
                         'type': 'binary'
                     })

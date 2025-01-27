@@ -4,7 +4,7 @@
 
         <!--Email template -->
         <record id="email_template_payment" model="mail.template">
-            <field name="name">Payment - Send by Email</field>
+            <field name="name">Complemento de Pago</field>
             <field name="email_from">{{'%s &lt;%s&gt;' % (object.company_id.name, object.company_id.email or '')}}</field>
             <field name="subject">Ref:{{object.name or 'n/a'}}</field>
             <field name="partner_to">{{object.partner_id.id}}</field>

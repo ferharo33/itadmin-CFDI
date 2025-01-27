@@ -1,4 +1,7 @@
-v16.35
+v16.37
+-No copiar datos fiscales al duplicar pago, no poner decimales en equivalenciadr.
+
+v16.36
 -Cambiar timbrados a SSL.
 
 v16.35
