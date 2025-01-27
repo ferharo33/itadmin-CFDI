@@ -1,3 +1,6 @@
+v18.08
+-No copiar datos fiscales al duplicar pago, no poner decimales en equivalenciadr.
+
 v18.07
 -Corrección el número de parcialidad
 
