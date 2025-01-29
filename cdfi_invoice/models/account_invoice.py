@@ -451,7 +451,11 @@ class AccountMove(models.Model):
                discount_prod = self.roundTraditional((line.price_unit * line.quantity - tax_included) - (line.price_subtotal - promo), no_decimales_prod) if line.discount or promo > 0 else 0
             else:
                discount_prod = self.roundTraditional((line.price_unit * line.quantity - tax_included) - line.price_subtotal, no_decimales_prod) if line.discount else 0
-            precio_unitario = self.roundTraditional((line.price_unit * line.quantity - tax_included) / line.quantity, no_decimales_prod)
+            if line.price_unit <= 1:
+                precio_unitario = (line.price_unit * line.quantity - tax_included) / line.quantity
+            else:
+                precio_unitario = self.roundTraditional((line.price_unit * line.quantity - tax_included) / line.quantity, no_decimales_prod)
+
             self.subtotal += total_wo_discount
             self.discount += discount_prod
 
