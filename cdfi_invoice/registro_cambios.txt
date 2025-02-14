@@ -1,3 +1,9 @@
+v18.10
+-Configurar campos para no copiar.
+
+v18.09
+-Corrección en número de pago de parcialidad.
+
 v18.08
 -No copiar datos fiscales al duplicar pago, no poner decimales en equivalenciadr.
 
