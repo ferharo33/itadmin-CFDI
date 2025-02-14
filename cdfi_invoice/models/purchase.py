@@ -101,10 +101,11 @@ class PurchaseOrder(models.Model):
     )
     uuid_relacionado = fields.Char(string=_('CFDI Relacionado'))
     
-    
+
     def action_view_invoice(self, invoices=False):
         res = super(PurchaseOrder,self).action_view_invoice(invoices=invoices)
         if res:
+            context = {} 
             if res.get('context')==None:
                 res['context']={}
             if res['context']:
