@@ -1,3 +1,6 @@
+v16.39
+-Configurar campos para no copiar
+
 v16.38
 -No redondear precios unitarios menores a uno debido a errores en redondeo.
 
