@@ -1,3 +1,6 @@
+v14.40
+-Configurar campos para no copiar.
+
 v14.39
 -No copiar datos fiscales al duplicar pago, no poner decimales en equivalenciadr.
 
