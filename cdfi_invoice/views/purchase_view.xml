@@ -7,7 +7,7 @@
         <field name="inherit_id" ref="purchase.purchase_order_form"/>
         <field name="arch" type="xml">
             <xpath expr="//notebook" position="inside">
-                   <field name="company_cfdi" invisible="1"/>
+                   <field name="company_cfdi" invisible="1"/> <!-- invisible -->
                     <page name="info_cdfi" string="CFDI" invisible="company_cfdi == False">
                         <group cols="4">
                             <group string="Detalles de Pago">
@@ -19,7 +19,7 @@
                     </page>
                 </xpath>
                 <field name="currency_id" position="after">
-                    <field name="factura_cfdi" invisible="1"/>
+                    <field name="factura_cfdi" invisible="1"/> <!-- invisible -->
                 </field>
         </field>
     </record>
