@@ -1,3 +1,6 @@
+v14.41
+-Corregir datos de emisor y receptor en facturas y notas de crédito.
+
 v14.40
 -Configurar campos para no copiar.
 
