@@ -1,3 +1,6 @@
+v18.11
+-Calculo de descuentos
+
 v18.10
 -Configurar campos para no copiar.
 
