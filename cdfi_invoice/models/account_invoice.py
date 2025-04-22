@@ -219,7 +219,7 @@ class AccountMove(models.Model):
         if not self.fecha_factura:
             self.fecha_factura = datetime.datetime.now()
 
-        if self.currency_id.name == 'MXN':
+        if self.currency_id.name.upper() == 'MXN':
             tipocambio = 1
         else:
             tipocambio = self.set_decimals(1 / self.currency_id.with_context(date=self.invoice_date).rate,
@@ -233,7 +233,7 @@ class AccountMove(models.Model):
                 'forma_pago': self.forma_pago_id.code,
                 'subtotal': self.amount_untaxed,
                 'descuento': 0,
-                'moneda': self.currency_id.name,
+                'moneda': self.currency_id.name.upper(),
                 'tipocambio': tipocambio,
                 'total': self.amount_total,
                 'tipocomprobante': self.tipo_comprobante,
@@ -865,7 +865,9 @@ Si requiere timbrar la factura nuevamente deshabilite el checkbox de "Proceso de
             if email_act and email_act.get('context'):
                 email_ctx = email_act['context']
                 email_ctx.update(default_email_from=inv.company_id.email)
-                inv.with_context(email_ctx).message_post_with_source(email_ctx.get('default_template_id'))
+                template_id = email_ctx.get('default_template_id')
+                if template_id:
+                    inv.with_context(email_ctx).message_post_with_source(template_id)
         return True
 
     @api.model
