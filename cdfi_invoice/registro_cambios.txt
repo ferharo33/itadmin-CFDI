@@ -1,3 +1,6 @@
+v16.41
+-Calculo de descuentos impuestos incluidos
+
 v16.40
 -Calculo de descuentos
 
