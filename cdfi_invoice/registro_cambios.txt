@@ -1,3 +1,6 @@
+v16.42
+-Corregir EquivalenciaDR en PDF
+
 v16.41
 -Calculo de descuentos impuestos incluidos
 
