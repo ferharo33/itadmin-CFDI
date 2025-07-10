@@ -323,12 +323,15 @@ class AccountPayment(models.Model):
                       decimal_p = 2
 
                       if partial.amount == 0:
-                            # Excepciones permitidas:
-                            # a) La conciliación no pertenece a este pago
-                            # b) O bien la línea del pago no tiene monto (falsa conciliación)
-                            if payment_line.payment_id.id != payment.id or abs(payment_line.amount_currency) < 0.01:
-                                continue
-                            raise Warning("Una factura adjunta en el pago no tiene un monto liquidado por el pago.")
+                        # Obtenemos el move de la línea de pago
+                        payment_move_id = payment.move_id.id
+                        # Si la conciliación con amount=0 proviene de un asiento que no es del pago (por ejemplo, Exchange)
+                        if payment_line.move_id.id != payment_move_id:
+                            continue  # Se ignora
+                        # Si la factura ya está completamente pagada (solo quedó esta línea fantasma)
+                        if invoice.amount_residual == 0:
+                            continue  # También la ignoramos, porque no afecta al XML
+                        raise Warning("Una factura adjunta en el pago no tiene un monto liquidado por el pago.\nFactura: %s\nPago: %s" % (invoice.name, payment.name))
 
                       if not invoice.factura_cfdi:
                           continue
