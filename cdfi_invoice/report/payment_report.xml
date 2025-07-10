@@ -289,7 +289,7 @@
                                       <span t-esc="float(row.get('saldo_pendiente'))" />
                                     </t>
                                     <t t-if="row.get('ImpSaldoAnt')">
-                                       <span t-esc="float(row.get('ImpSaldoAnt'))" />
+                                       <span t-esc="'%.2f' % row.get('ImpSaldoAnt')"/>
                                     </t>
                                 </td>
                                 <td>
@@ -297,7 +297,7 @@
                                       <span t-esc="float(row.get('monto_pagar'))"/>
                                     </t>
                                     <t t-if="row.get('ImpPagado')">
-                                       <span t-esc="float(row.get('ImpPagado'))"/>
+                                       <span t-esc="'%.2f' % row.get('ImpPagado')"/>
                                     </t>
                                 </td>
                                 <td>
@@ -305,7 +305,7 @@
                                       <span t-esc="float(row.get('saldo_restante'))"/>
                                     </t>
                                     <t t-if="row.get('ImpSaldoInsoluto')">
-                                       <span t-esc="float(row.get('ImpSaldoInsoluto'))"/>
+                                       <span t-esc="'%.2f' % row.get('ImpSaldoInsoluto')"/>
                                     </t>
                                 </td>
                            </tr>
