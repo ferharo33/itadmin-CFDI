@@ -323,7 +323,9 @@ class AccountPayment(models.Model):
                       decimal_p = 2
 
                       if partial.amount == 0:
-                          raise Warning("Una factura adjunta en el pago no tiene un monto liquidado por el pago. \nRevisa que todas las facturas tengan un monto pagado, puede ser necesario desvincular las facturas y vinculalas en otro orden.")
+                        if payment_line.move_id.id != payment.move_id.id:
+                            continue  # Ignorar conciliaciones que no son del pago actual
+                        raise Warning("Una factura adjunta en el pago no tiene un monto liquidado por el pago.")
 
                       if not invoice.factura_cfdi:
                           continue
