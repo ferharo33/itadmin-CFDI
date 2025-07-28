@@ -427,18 +427,41 @@ class AccountPayment(models.Model):
                       #    if equivalenciadr == 1:
                       #       equivalenciadr = payment.set_decimals(equivalenciadr, 10)
 
+                    #   docto_relacionados.append({
+                    #          'MonedaDR': invoice.moneda,
+                    #          'EquivalenciaDR': equivalenciadr,
+                    #          'IdDocumento': invoice.folio_fiscal,
+                    #          'folio_facura': invoice.number_folio,
+                    #          'NumParcialidad': len(payment_content),
+                    #          'ImpSaldoAnt': float_round(min(invoice.amount_residual + amount_paid_invoice_curr, invoice.amount_total), precision_digits=decimal_p, rounding_method='UP'),
+                    #          'ImpPagado': float_round(amount_paid_invoice_curr, precision_digits=decimal_p, rounding_method='UP'),
+                    #          'ImpSaldoInsoluto': round(float_round(min(invoice.amount_residual + amount_paid_invoice_curr, invoice.amount_total), precision_digits=decimal_p, rounding_method='UP') - \
+                    #                           float_round(amount_paid_invoice_curr, precision_digits=decimal_p, rounding_method='UP'),2),
+                    #          'ObjetoImpDR': objetoimpdr,
+                    #          'ImpuestosDR': {'traslados': trasladodr, 'retenciones': retenciondr,},
+                    #   })
+
+                      saldo_ant = float_round(
+                          min(invoice.amount_residual + amount_paid_invoice_curr, invoice.amount_total),
+                          precision_digits=decimal_p,
+                          rounding_method='UP'
+                      )
+                      imp_pagado = float_round(amount_paid_invoice_curr, precision_digits=decimal_p, rounding_method='UP')
+                      saldo_insoluto = round(saldo_ant - imp_pagado, 2)
+                      if saldo_insoluto < 0:
+                          saldo_insoluto = 0.00
+
                       docto_relacionados.append({
-                             'MonedaDR': invoice.moneda,
-                             'EquivalenciaDR': equivalenciadr,
-                             'IdDocumento': invoice.folio_fiscal,
-                             'folio_facura': invoice.number_folio,
-                             'NumParcialidad': len(payment_content),
-                             'ImpSaldoAnt': float_round(min(invoice.amount_residual + amount_paid_invoice_curr, invoice.amount_total), precision_digits=decimal_p, rounding_method='UP'),
-                             'ImpPagado': float_round(amount_paid_invoice_curr, precision_digits=decimal_p, rounding_method='UP'),
-                             'ImpSaldoInsoluto': round(float_round(min(invoice.amount_residual + amount_paid_invoice_curr, invoice.amount_total), precision_digits=decimal_p, rounding_method='UP') - \
-                                              float_round(amount_paid_invoice_curr, precision_digits=decimal_p, rounding_method='UP'),2),
-                             'ObjetoImpDR': objetoimpdr,
-                             'ImpuestosDR': {'traslados': trasladodr, 'retenciones': retenciondr,},
+                          'MonedaDR': invoice.moneda,
+                          'EquivalenciaDR': equivalenciadr,
+                          'IdDocumento': invoice.folio_fiscal,
+                          'folio_facura': invoice.number_folio,
+                          'NumParcialidad': len(payment_content),
+                          'ImpSaldoAnt': saldo_ant,
+                          'ImpPagado': imp_pagado,
+                          'ImpSaldoInsoluto': saldo_insoluto,
+                          'ObjetoImpDR': objetoimpdr,
+                          'ImpuestosDR': {'traslados': trasladodr, 'retenciones': retenciondr,},
                       })
 
                payment.write({'docto_relacionados': json.dumps(docto_relacionados),
