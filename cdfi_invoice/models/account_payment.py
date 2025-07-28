@@ -447,9 +447,11 @@ class AccountPayment(models.Model):
                           rounding_method='UP'
                       )
                       imp_pagado = float_round(amount_paid_invoice_curr, precision_digits=decimal_p, rounding_method='UP')
+                      # Ajustar imp_pagado si excede el saldo anterior
+                      if imp_pagado > saldo_ant:
+                          imp_pagado = saldo_ant
+
                       saldo_insoluto = round(saldo_ant - imp_pagado, 2)
-                      if saldo_insoluto < 0:
-                          saldo_insoluto = 0.00
 
                       docto_relacionados.append({
                           'MonedaDR': invoice.moneda,
