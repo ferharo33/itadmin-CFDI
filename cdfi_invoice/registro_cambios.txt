@@ -1,3 +1,9 @@
+v14.43
+-Permitir agregar conceptos en traslado de exportaciones
+
+v14.42
+-Corregir EquivalenciaDR en PDF
+
 v14.41
 -Corregir datos de emisor y receptor en facturas y notas de crédito.
 
