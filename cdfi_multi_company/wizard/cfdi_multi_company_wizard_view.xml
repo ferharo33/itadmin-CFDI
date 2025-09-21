@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_cfdi_multi_company_wizard" model="ir.ui.view">
+        <field name="name">cfdi.multi.company.wizard.form</field>
+        <field name="model">cfdi.multi.company.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Seleccionar compañía CFDI">
+                <group>
+                    <field name="company_id" options="{'no_create': True}"/>
+                </group>
+                <footer>
+                    <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                    <button string="Aceptar" type="object" name="action_confirm" class="btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
