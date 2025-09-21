@@ -7,7 +7,7 @@
     </template>
 
     <template id="report_invoice_document_inherit" inherit_id="cdfi_invoice.report_invoice_document">
-        <xpath expr="//t[@t-set='o' and @t-value=\"o.with_context({'lang':o.partner_id.lang})\"]" position="after">
+        <xpath expr="//t[@t-set='o' and @t-value=&quot;o.with_context({'lang':o.partner_id.lang})&quot;]" position="after">
             <t t-set="cfdi_company" t-value="o.cfdi_emitter_company_id or o.company_id"/>
         </xpath>
         <xpath expr="//img[@t-if='o.company_id.logo']" position="attributes">
