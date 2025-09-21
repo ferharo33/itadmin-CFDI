@@ -3,9 +3,9 @@
     <record id="view_invoice_inherit_form" model="ir.ui.view">
             <field name="name">account.move.multi.rfc.form</field>
             <field name="model">account.move</field>
-            <field name="inherit_id" ref="account.view_move_form" />
+            <field name="inherit_id" ref="cdfi_invoice.view_invoice_inherit_form" />
             <field name="arch" type="xml">
-               <xpath expr="//field[@name='invoice_payment_term_id']" position="after">
+               <xpath expr="//field[@name='tipo_comprobante']" position="before">
                    <field name="custom_company_id" attrs="{'readonly': [('estado_factura','!=','factura_no_generada')]}"/>
                </xpath>
             </field>
