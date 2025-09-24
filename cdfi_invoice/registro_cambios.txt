@@ -1,3 +1,6 @@
+v18.15
+-Corrección al utilziar descuentos y notas / seciones
+
 v18.14
 -Permitir agregar conceptos en traslado de exportaciones
 
