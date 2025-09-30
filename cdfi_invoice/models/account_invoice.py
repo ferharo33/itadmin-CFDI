@@ -303,6 +303,8 @@ class AccountMove(models.Model):
         negative_lines_subtotal = []
         tax_incl_neg = False
         for line in self.invoice_line_ids:
+            if line.display_type in ('line_section', 'line_note'):
+                continue
             if line.price_subtotal <= 0:
                 for line_tax in line.tax_ids:
                     if line_tax.price_include:
@@ -321,7 +323,7 @@ class AccountMove(models.Model):
                 self.write({'proceso_timbrado': False})
                 self.env.cr.commit()
                 raise UserError(_('Hay una línea sin producto.'))
-            if line.price_unit <= 0:
+            if line.price_unit <= 0 and self.exportacion == '01':
                 continue
 
             if not line.product_id.clave_producto:
