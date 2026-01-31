@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vista de formulario del wizard -->
+    <record id="view_sale_create_global_invoice_form" model="ir.ui.view">
+        <field name="name">sale.create.global.invoice.form</field>
+        <field name="model">sale.create.global.invoice</field>
+        <field name="arch" type="xml">
+            <form string="Crear Factura Global">
+                <group>
+                    <group>
+                        <field name="partner_id" options="{'no_create': True}"/>
+                        <field name="date_invoice"/>
+                    </group>
+                    <group>
+                        <field name="journal_id" options="{'no_create': True}"/>
+                        <field name="currency_id"/>
+                        <field name="sale_order_count"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="create_global_invoice"
+                            type="object"
+                            string="Crear Factura Global"
+                            class="btn-primary"/>
+                    <button string="Cancelar"
+                            class="btn-secondary"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Acción del wizard -->
+    <record id="action_sale_create_global_invoice" model="ir.actions.act_window">
+        <field name="name">Crear Factura Global</field>
+        <field name="res_model">sale.create.global.invoice</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="binding_view_types">list</field>
+    </record>
+</odoo>

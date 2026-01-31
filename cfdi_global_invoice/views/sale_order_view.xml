@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Heredar vista de formulario de pedido de venta -->
+    <record id="view_order_form_global_invoice" model="ir.ui.view">
+        <field name="name">sale.order.form.global.invoice</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="is_global_invoice" attrs="{'invisible': [('is_global_invoice', '=', False)]}"/>
+                <field name="global_invoice_id" attrs="{'invisible': [('global_invoice_id', '=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Heredar vista de lista de pedido de venta (opcional) -->
+    <record id="view_order_tree_global_invoice" model="ir.ui.view">
+        <field name="name">sale.order.tree.global.invoice</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='activity_ids']" position="before">
+                <field name="is_global_invoice" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

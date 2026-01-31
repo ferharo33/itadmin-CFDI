@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>CFDI Factura Global</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #875a7b;
+            border-bottom: 2px solid #875a7b;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #875a7b;
+            margin-top: 30px;
+        }
+        .feature {
+            background: #f9f9f9;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #875a7b;
+        }
+        .workflow {
+            background: #e8f4f8;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        ul {
+            margin: 10px 0;
+        }
+        .author {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+            text-align: center;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>CFDI Factura Global</h1>
+
+    <p>Módulo para Odoo 14 que permite generar facturas globales CFDI desde múltiples pedidos de venta.</p>
+
+    <h2>Características Principales</h2>
+
+    <div class="feature">
+        <strong>✓ Selección Múltiple</strong>
+        <p>Seleccione varios pedidos de venta confirmados y genere una sola factura global.</p>
+    </div>
+
+    <div class="feature">
+        <strong>✓ Agrupación Inteligente</strong>
+        <p>Los productos iguales se agrupan automáticamente, sumando cantidades.</p>
+    </div>
+
+    <div class="feature">
+        <strong>✓ Precio Promedio Ponderado</strong>
+        <p>Calcula el precio promedio ponderado cuando se agrupan productos con diferentes precios.</p>
+    </div>
+
+    <div class="feature">
+        <strong>✓ Validaciones Robustas</strong>
+        <p>Verifica que todos los pedidos tengan la misma moneda, estén confirmados y no facturados.</p>
+    </div>
+
+    <div class="feature">
+        <strong>✓ Trazabilidad Completa</strong>
+        <p>Mantiene la relación entre pedidos y factura, con mensajes de seguimiento.</p>
+    </div>
+
+    <h2>Flujo de Trabajo</h2>
+
+    <div class="workflow">
+        <ol>
+            <li>Vaya a <strong>Ventas → Pedidos → Pedidos de Venta</strong></li>
+            <li>Seleccione múltiples pedidos confirmados (use los checkboxes)</li>
+            <li>Haga clic en <strong>Acción → Crear Factura Global</strong></li>
+            <li>En el wizard:
+                <ul>
+                    <li>Verifique/seleccione el cliente</li>
+                    <li>Ajuste la fecha si es necesario</li>
+                    <li>Revise el diario y moneda</li>
+                </ul>
+            </li>
+            <li>Haga clic en <strong>Crear Factura Global</strong></li>
+            <li>Se abrirá la factura en borrador, lista para timbrar</li>
+        </ol>
+    </div>
+
+    <h2>Validaciones</h2>
+    <ul>
+        <li>Los pedidos deben estar confirmados (estado: Venta o Hecho)</li>
+        <li>No deben estar previamente facturados</li>
+        <li>Todos deben tener la misma moneda</li>
+        <li>Deben tener al menos una línea facturable</li>
+    </ul>
+
+    <h2>Compatibilidad</h2>
+    <ul>
+        <li>Odoo 14.0</li>
+        <li>Compatible con módulo cdfi_invoice</li>
+    </ul>
+
+    <div class="author">
+        <p><strong>Teamfactory</strong></p>
+        <p><a href="https://teamfactory.mx">https://teamfactory.mx</a></p>
+    </div>
+</body>
+</html>
