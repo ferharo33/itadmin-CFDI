@@ -347,10 +347,8 @@ class AccountPayment(models.Model):
                           equivalenciadr = 1
                       elif invoice.currency_id == mxn_currency and invoice.currency_id != payment_line.currency_id:
                           amount_paid_invoice_curr = invoice_amount
-                          amount_paid_invoice_comp_curr = payment_line.company_currency_id.round(payment.amount  * (abs(payment_line.balance) / paid_amount_comp_curr))
-                          invoice_rate = partial.debit_amount_currency / partial.amount
-                          exchange_rate = amount_paid_invoice_curr / amount_paid_invoice_comp_curr
-                          equivalenciadr = payment.roundTraditional(exchange_rate, 6) + 0.000001
+                          payment_amount_curr = partial[f'{field2}_amount_currency']
+                          equivalenciadr = payment.roundTraditional(amount_paid_invoice_curr / payment_amount_curr, 6) + 0.000001
                       else:
                           amount_paid_invoice_curr = invoice_amount
                           exchange_rate = partial.debit_amount_currency / partial.amount
